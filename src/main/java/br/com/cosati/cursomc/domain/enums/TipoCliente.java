@@ -2,7 +2,7 @@ package br.com.cosati.cursomc.domain.enums;
 
 public enum TipoCliente {
 
-	ESSOAFISICA(1, "Pessoa Física"),
+	PESSOAFISICA(1, "Pessoa Física"),
 	PESSOAJURIDICA(2, "Pessoa Jurídica");
 	
 	private int cod;
