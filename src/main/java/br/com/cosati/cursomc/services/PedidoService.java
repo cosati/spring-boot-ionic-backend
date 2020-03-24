@@ -10,9 +10,11 @@ import br.com.cosati.cursomc.domain.ItemPedido;
 import br.com.cosati.cursomc.domain.PagamentoComBoleto;
 import br.com.cosati.cursomc.domain.Pedido;
 import br.com.cosati.cursomc.domain.enums.EstadoPagamento;
+import br.com.cosati.cursomc.repositories.ClienteRepository;
 import br.com.cosati.cursomc.repositories.ItemPedidoRepository;
 import br.com.cosati.cursomc.repositories.PagamentoRepository;
 import br.com.cosati.cursomc.repositories.PedidoRepository;
+import br.com.cosati.cursomc.repositories.ProdutoRepository;
 import br.com.cosati.cursomc.services.exceptions.ObjectNotFoundException;
 
 
@@ -34,6 +36,9 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
 	public Pedido find(Integer id) {
 		Pedido obj = repo.findOne(id);
 		if (obj == null) {
@@ -47,6 +52,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		obj.setCliente(clienteRepository.getOne(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		if (obj.getPagamento() instanceof PagamentoComBoleto) {
@@ -57,10 +63,12 @@ public class PedidoService {
 		pagamentoRepository.save(obj.getPagamento());
 		for (ItemPedido x : obj.getItens()) {
 			x.setDesconto(0.0);
-			x.setPreco(produtoService.find(x.getProduto().getId()).getPreco());
+			x.setProduto(produtoService.find(x.getProduto().getId()));
+			x.setPreco(x.getProduto().getPreco());
 			x.setPedido(obj);
 		}
 		itemPedidoRepository.save(obj.getItens());
+		System.out.println(obj);
 		return obj;
 	}
 	
