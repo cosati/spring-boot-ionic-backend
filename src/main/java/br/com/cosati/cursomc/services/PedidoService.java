@@ -70,7 +70,7 @@ public class PedidoService {
 			x.setPedido(obj);
 		}
 		itemPedidoRepository.save(obj.getItens());
-		emailService.sendOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	}
 	
