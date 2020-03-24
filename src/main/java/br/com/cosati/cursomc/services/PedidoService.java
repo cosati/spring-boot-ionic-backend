@@ -14,7 +14,6 @@ import br.com.cosati.cursomc.repositories.ClienteRepository;
 import br.com.cosati.cursomc.repositories.ItemPedidoRepository;
 import br.com.cosati.cursomc.repositories.PagamentoRepository;
 import br.com.cosati.cursomc.repositories.PedidoRepository;
-import br.com.cosati.cursomc.repositories.ProdutoRepository;
 import br.com.cosati.cursomc.services.exceptions.ObjectNotFoundException;
 
 
