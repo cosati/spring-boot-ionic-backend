@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cosati.cursomc.domain.Produto;
-import br.com.cosati.cursomc.dto.CategoriaDTO;
 import br.com.cosati.cursomc.dto.ProdutoDTO;
 import br.com.cosati.cursomc.resources.utils.URL;
 import br.com.cosati.cursomc.services.ProdutoService;
